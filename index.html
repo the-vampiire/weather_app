@@ -1,0 +1,77 @@
+<head>
+    <!-- META TAGS -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <script src="https://use.fontawesome.com/c60112b331.js"></script>
+
+    <!-- TAB TITLE -->
+    <title>Local Weather</title>
+
+
+    <!-- CSS -->
+    <style>
+
+        body{
+            background-image: url("Images/DEFAULT_adrian-233456_mini.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            weidth: 100vw;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row" style="margin-top: 150px">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div id="jumbotron" class="jumbotron" style="background-color: black; opacity:0.5; border-radius: 3%">
+                <div id='data_row' class="row text-center" style="color:white;">
+                    <div class="col-md-4 col-xs-4"></div>
+                    <div class="col-md-4 col-xs-4">
+                        <div id="temperature" style="border-left: ridge white 2px; border-right: ridge white 2px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="wrapper" style="display: flex;justify-content: center">
+        <button id="Get">Click for location</button>
+        <button id="Experimental">Click for experimental feature</button>
+        <button id="F_or_C">Click for F or C</button>
+    </div>
+
+
+
+
+</div> <!-- // end main container -->
+
+
+
+
+
+
+
+<!-- SCRIPT CODE BELOW THIS LINE -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="Weather.js"></script>
+
+</body>
+</html>
