@@ -45,7 +45,6 @@ get_weather();
                     Feels_Like = false;
                     $('#Actual_Switch').prop('checked',true);
                     Actual = true;
-                    console.log(Actual, $('#Actual_Switch')[0].checked);
                 }
             });
 
@@ -58,7 +57,6 @@ get_weather();
                 else if(Humidity){
                     Humidity = false;
                 }
-                console.log('Humidity'+Humidity);
             });
 
     // Cloud Coverage (default: On)
@@ -70,7 +68,6 @@ get_weather();
             else if(Cloud_Coverage){
                 Cloud_Coverage = false;
             }
-            console.log('Clouds'+Cloud_Coverage);
         });
 
 
@@ -159,7 +156,7 @@ get_weather();
                     // if no photo is found for location return to normal background image
                     if (photo === undefined || photo.farm === undefined) {
                         alert('Failed to load local Flickr image');
-                        body.css('background-image','Images/DEFAULT_adrian-233456_mini.jpg');
+
                         $('#Experimental_Switch').prop('checked', false);
                         get_weather();
 
@@ -213,10 +210,10 @@ get_weather();
                         location_div.append('<h2>'+name+'</h2>');
                         date_div.append('<h3>'+date+'</h3>');
 
-                    // display temperature
+                    // display weather
                         if(Celsius){
                             if(Feels_Like){
-                                feels_like_temp_div.empty().append('<h3>Feels '+feels_like_c+'<span>&#8451;</span> Like</h3>');
+                                feels_like_temp_div.empty().append('<h3>'+feels_like_c+'<span>&#8451;</span></h3>');
                             }
                             if(Actual){
                                 temperature_div.empty().append('<h3>'+temp_c+'<span>&#8451;</span></h3>');
@@ -225,7 +222,7 @@ get_weather();
 
                         if(!Celsius){
                             if(Feels_Like){
-                                feels_like_temp_div.empty().append('<h3>Feels '+feels_like_f+'<span>&#8457;</span> Like</h3>');
+                                feels_like_temp_div.empty().append('<h3>'+feels_like_f+'<span>&#8457;</span></h3>');
                             }
                             if(Actual){
                                 temperature_div.empty().append('<h3>'+temp_f+'<span>&#8457;</span></h3>');
@@ -323,14 +320,12 @@ get_weather();
                                     body.css('background-image', 'url("Images/RAINY_gabriele-diwald-201135_mini.jpg")');
                                     break;
                                 default:
-                                    console.log('no matching code');
                                     body.css('background-image', 'url("Images/SUNNY_joseph-barrientos-7032_mini.jpg")');
                             }
                         }
 
                         // night time
                         else if(is_day === 0){
-                            console.log('nighttime');
                             jumbotron.css('background-color','rgba(255,255,255,0.1)', 'color','white');
                             temp_row.css('color','white');
                             cond_row.css('color','white');
@@ -399,7 +394,6 @@ get_weather();
                                     body.css('background-image', 'url("Images/NIGHT_SNOW_jason-strull-216097_mini.jpg")');
                                     break;
                                 default:
-                                    console.log('no matching code');
                                     body.css('background-image', 'url("Images/NIGHT_hoang-duy-le-149870_mini.jpg")');
 
                             }
