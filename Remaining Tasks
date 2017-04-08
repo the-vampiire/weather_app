@@ -1,0 +1,13 @@
+JS
+  complete the IP based locator block
+  feed image credit for both stock photos and flickr pulls to a footer at the bottom of the screen
+  allow for user cycling through potential flickr matches 
+  create slider button functions
+
+HTML
+  complete jumbotron UI for weather conditions output
+  add footer for storing image credit
+  add slider buttons for check weather / use experimental / F or C / actual or feels like temperatures
+    add slider buttons to choose which weather conditions to display
+  add buttons for cycling through flickr images 
+  
