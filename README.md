@@ -1,14 +1,15 @@
 # weather_app
 Weather App for Free Code Camp
 
-<ul> Task:
+Task:
+<ul> 
 <li>
 Produce a weather app that uses an API to retrieve user location and local weather information. Allow for user to select Celsius or Fahrenheit temperature units.
 </li>
 </ul>
 
-  
-<ul>Delivered:
+Delivered:  
+<ul>
 <li>
 Weather app that uses secure location services for precise location determination 
 </li>
@@ -43,7 +44,8 @@ Includes Celsius, actual and feels like temperatures, humidity, cloud cover, and
 </li>
 </ul>
 
-<ul>Upcoming (as of 4/9):
+Upcoming (as of 4/9):
+<ul>
 <li>
 Credit footer bar which displays the photographer's name, photo title, and link to the photo being displayed
 </li>
