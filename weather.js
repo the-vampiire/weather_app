@@ -434,16 +434,15 @@ get_weather();
 
                 });
 
-                // shake the options menu button on page load completion to notify user of its existence...
-                setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 5});}, 3500);
-                setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 5});}, 5500);
-
-
             }
 
         }
 
     }
+
+    // shake the options menu button on page load completion to notify user of its existence...
+    setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 5});}, 5000);
+    setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 5});}, 7500);
 
 });
 
