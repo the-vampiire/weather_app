@@ -4,13 +4,18 @@ $(function() {
 get_weather();
 
 
+
     // toggles sidebar
 
+
+        // JQuery shortcuts
         var wrapper = $('#wrapper'),
-        open = false,
         sidebar_button = $('#sidebar_button');
 
-        // checks arrow direction for menu button, swaps as expected and opens sidebar
+    // checks arrow direction for menu button, swaps as expected and opens sidebar
+
+        var open = false;
+
         function open_sidebar(){
             if(open){
                 open = false;
@@ -427,6 +432,12 @@ get_weather();
                     }
 
                 });
+
+                // shake the options menu button on page load completion to notify user of its existence...
+                setTimeout(function(){sidebar_button.effect('shake', {distance: 10},{times: 5});}, 2000);
+                setTimeout(function(){sidebar_button.effect('shake', {distance: 10},{times: 5});}, 4000);
+
+
             }
 
         }
