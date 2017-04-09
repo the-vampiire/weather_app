@@ -125,12 +125,12 @@ get_weather();
         feels_like_temp_div.empty();
         clouds_div.empty();
         humidity_div.empty();
-        condition_icon_div.empty();
+        condition_icon_div.hide();
         condition_text_div.empty();
         location_div.empty();
 
         // display loading animation
-        loading_div.append('<i class="fa fa-spinner fa-pulse fa-4x" style="color:white"></i>');
+        loading_div.append('<i class="fa fa-spinner fa-pulse fa-5x" style="color:white"></i>');
 
         // if https and user accepts location services
         if (navigator.geolocation) {
@@ -143,12 +143,13 @@ get_weather();
                 var lon = position.coords.longitude;
 
                 get_weather_secure(lat, lon);
-
-
             }
 
             function fail() {
-                alert('Failed to retrieve secure location data');
+                alert('Failed to retrieve secure location data\n. ' +
+                    '\nEnsure that the browser you are using has location service permission enabled\n' +
+                    'for iOS: settings -> privacy -> location services -> Safari / Facebook / your browser -> enable \n' +
+                    'Then refresh and accept the request for checking your location');
             }
 
         // gets flickr background image based on location
@@ -156,21 +157,20 @@ get_weather();
 
                 $.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=bc63861a86c28aee09bb476d83cfe159&' +
                     'format=json&lat=' + lat + '&lon=' + lon + '&accuracy=16&safe_search=1&content_type=1&per_page=1&' +
-                    'sort=interestingness-desc&text=city&text=skyline&media=photos&nojsoncallback=1', function (data) {
+                    'sort=interestingness-desc&text=downtown&text=city&text=skyline&media=photos&nojsoncallback=1', function (data) {
 
                     var photo = data.photos.photo[0];
 
-                    // if no photo is found for location return to normal background image
+                    // if no photo is found for location turn set experimental switch and variable to false and stop loading
                     if (photo === undefined || photo.farm === undefined) {
-                        alert('Failed to load local Flickr image');
+                        alert('No Flickr image matching request criteria was found for your area, sorry.');
 
                         $('#Experimental_Switch').prop('checked', false);
-                        get_weather();
-
+                        experimental = false;
                     }
+
                     else {
                         $('body').css("background-image", "url(" + "https://farm" + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + "_h.jpg" + ")");
-
                     }
                 });
             }
@@ -212,6 +212,7 @@ get_weather();
 
                     // remove loading animation
                     loading_div.empty();
+                    condition_icon_div.show();
 
                     // display date, time, location
                         time_div.append('<h3>'+time+'</h3>');
@@ -221,34 +222,34 @@ get_weather();
                     // display weather
                         if(Celsius){
                             if(Feels_Like){
-                                feels_like_temp_div.empty().append('<h3>'+feels_like_c+'<span>&#8451;</span></h3>');
+                                feels_like_temp_div.append('<h3>'+feels_like_c+'<span>&#8451;</span></h3>');
                             }
                             if(Actual){
-                                temperature_div.empty().append('<h3>'+temp_c+'<span>&#8451;</span></h3>');
+                                temperature_div.append('<h3>'+temp_c+'<span>&#8451;</span></h3>');
                             }
                         }
 
                         if(!Celsius){
                             if(Feels_Like){
-                                feels_like_temp_div.empty().append('<h3>'+feels_like_f+'<span>&#8457;</span></h3>');
+                                feels_like_temp_div.append('<h3>'+feels_like_f+'<span>&#8457;</span></h3>');
                             }
                             if(Actual){
-                                temperature_div.empty().append('<h3>'+temp_f+'<span>&#8457;</span></h3>');
+                                temperature_div.append('<h3>'+temp_f+'<span>&#8457;</span></h3>');
                             }
                         }
 
                         if(Cloud_Coverage){
-                            clouds_div.empty().append('<h3>Cloudiness: '+cloud_coverage+'%</h3>');
+                            clouds_div.append('<h3>Cloud Cover: '+cloud_coverage+'%</h3>');
                         }
 
 
                         if(Humidity){
-                            humidity_div.empty().append('<h3>Humidity: '+humidity+'%</h3>');
+                            humidity_div.append('<h3>Humidity: '+humidity+'%</h3>');
                         }
 
 
-                        condition_icon_div.empty().append('<img src="https:'+condition_icon+'">');
-                        condition_text_div.empty().append('<h4>'+condition_text+'</h4>');
+                        condition_icon_div.attr('src', 'https://'+condition_icon).attr({width: 100});
+                        condition_text_div.append('<h4>'+condition_text+'</h4>');
 
 
             // sets background image depending on condition code if experimental feature is off (default)
@@ -334,7 +335,7 @@ get_weather();
 
                         // night time
                         else if(is_day === 0){
-                            jumbotron.css('background-color','rgba(255,255,255,0.1)', 'color','white');
+                            jumbotron.css('background-color','rgba(255,255,255,0.3)', 'color','white');
                             temp_row.css('color','white');
                             cond_row.css('color','white');
                             switch(condition_code){
