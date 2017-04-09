@@ -3,9 +3,11 @@ Weather App for Free Code Camp
 
 
 Task:
+
   Produce a weather app that uses an API to retrieve user location and local weather information. Allow for user to select Celsius or Fahrenheit temperature units.
   
 Delivered:
+
   Weather app that uses secure location services for precise location determination 
   
   Utilies Apixu weather API to determine current weather conditions
