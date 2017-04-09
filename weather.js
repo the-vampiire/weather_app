@@ -11,6 +11,10 @@ get_weather();
             $("#wrapper").toggleClass("toggled");
         });
 
+        $('#page-content-wrapper').click(function(){
+            $("#wrapper").toggleClass("toggled");
+        })
+
     // Temperature Units (default: Fahrenheit)
             var Celsius = false;
             $('#Units_Switch').click(function(){
@@ -27,9 +31,13 @@ get_weather();
         $('#Actual_Switch').click(function(){
             if(!Actual){
                 Actual = true;
+                $('#Feels_Like_Switch').prop('checked', false);
+                Feels_Like = false;
             }
             else if(Actual){
                 Actual = false;
+                $('#Feels_Like_Switch').prop('checked', true);
+                Feels_Like = true;
             }
         });
 
@@ -79,7 +87,9 @@ get_weather();
                 experimental = false;
             }
             else if (!experimental) {
+                alert('Experimental feature. Uses location data to find the top rated image of your current city from Flickr! If it fails the page will reload with normal options selected');
                 experimental = true;
+
             }
         });
 
@@ -146,7 +156,7 @@ get_weather();
 
         // gets flickr background image based on location
             function get_flickr(lat, lon) {
-                alert('Experimental feature. Uses location data to find the top rated image of your current city from Flickr! If it fails the page will reload with normal options selected');
+
                 $.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=bc63861a86c28aee09bb476d83cfe159&' +
                     'format=json&lat=' + lat + '&lon=' + lon + '&accuracy=16&safe_search=1&content_type=1&per_page=1&' +
                     'sort=interestingness-desc&text=city&text=skyline&media=photos&nojsoncallback=1', function (data) {
@@ -163,6 +173,7 @@ get_weather();
                     }
                     else {
                         $('body').css("background-image", "url(" + "https://farm" + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + "_h.jpg" + ")");
+
                     }
                 });
             }
