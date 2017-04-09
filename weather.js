@@ -6,14 +6,11 @@ get_weather();
 
     // toggles sidebar
 
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
+        $('#page-content-wrapper').click(function(){
             $("#wrapper").toggleClass("toggled");
         });
 
-        $('#page-content-wrapper').click(function(){
-            $("#wrapper").toggleClass("toggled");
-        })
+
 
     // Temperature Units (default: Fahrenheit)
             var Celsius = false;
