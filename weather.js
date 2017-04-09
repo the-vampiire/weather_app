@@ -10,20 +10,21 @@ get_weather();
         open = false,
         sidebar_button = $('#sidebar_button');
 
-        sidebar_button.click(function(){
-            if(!open){
-                open = true;
-                sidebar_button.empty().html('<i id="button_icon" class="fa fa-caret-left fa-2x"></i>');
-            }
-            else if(open){
+        // checks arrow direction for menu button, swaps as expected and opens sidebar
+        function open_sidebar(){
+            if(open){
                 open = false;
                 sidebar_button.empty().html('<i id="button_icon" class="fa fa-caret-right fa-2x"></i>');
             }
+            else if(!open){
+                open = true;
+                sidebar_button.empty().html('<i id="button_icon" class="fa fa-caret-left fa-2x"></i>');
+            }
 
-            wrapper.toggleClass("toggled");
+            wrapper.toggleClass('toggled');
+        }
 
-
-        });
+        sidebar_button.click(open_sidebar);
 
 
 
@@ -109,7 +110,7 @@ get_weather();
     // Apply Settings
 
         $('#apply_settings').click(function(){
-            wrapper.toggleClass("toggled");
+            open_sidebar();
             get_weather();
         });
 
