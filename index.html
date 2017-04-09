@@ -3,6 +3,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Enable iOS web app formatting -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent black">
+    <meta name="appl-mobile-web-app-title" content="Vamp Weather">
+
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -11,53 +16,150 @@
     <script src="https://use.fontawesome.com/c60112b331.js"></script>
 
     <!-- TAB TITLE -->
-    <title>Local Weather</title>
+    <title>Weather App</title>
 
 
     <!-- CSS -->
-    <style>
+    <link href="weather.css" type="text/css" rel="stylesheet">
+    <link href="simple-sidebar.css" type="text/css" rel="stylesheet">
 
-        body{
-            background-image: url("Images/DEFAULT_adrian-233456_mini.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            weidth: 100vw;
-        }
+    <!-- iOS web app icon -->
+    <link href="Images/ios10-weather-app-icon.png" rel="apple-touch-icon">
 
-    </style>
+    <!-- iOS web app splash screen -->
+    <link href="" rel="apple-touch-startup-image">
 
 </head>
 
 <body>
 
-<div class="container-fluid">
-    <div class="row" style="margin-top: 150px">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div id="jumbotron" class="jumbotron" style="background-color: black; opacity:0.5; border-radius: 3%">
-                <div id='data_row' class="row text-center" style="color:white;">
-                    <div class="col-md-4 col-xs-4"></div>
-                    <div class="col-md-4 col-xs-4">
-                        <div id="temperature" style="border-left: ridge white 2px; border-right: ridge white 2px;">
+<div id="wrapper">
+    <!-- Sidebar courtesy of StartBootstrap.com -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav text-center sidebar-nav-fixed" style="color:white">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Weather Display Options
+                    </a>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-xs-8" style="margin-right: -50px">
+                            Celsius
+                        </div>
+                        <div class="col-xs-4" style="margin-right: -20px">
+                            <label class="switch">
+                                <input id="Units_Switch" type="checkbox">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-xs-8" style="margin-right: -50px">
+                            Actual Temperature
+                        </div>
+                        <div class="col-xs-4" style="margin-right: -20px">
+                            <label class="switch">
+                                <input id="Actual_Switch" type="checkbox" checked="checked">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-xs-8" style="margin-right: -50px">
+                            Feels Like Temperature
+                        </div>
+                        <div class="col-xs-4" style="margin-right: -20px">
+                            <label class="switch">
+                                <input id="Feels_Like_Switch" type="checkbox">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-xs-8 " style="margin-right: -50px">
+                            Humidity
+                        </div>
+                        <div class="col-xs-4" style="margin-right: -20px">
+                            <label class="switch">
+                                <input id="Humidity_Switch" type="checkbox" checked="checked">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-xs-8 " style="margin-right: -50px">
+                            Cloud Coverage
+                        </div>
+                        <div class="col-xs-4" style="margin-right: -20px">
+                            <label class="switch">
+                                <input id="Cloud_Switch" type="checkbox" checked="checked">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-xs-8 " style="margin-right: -50px">
+                            Experimental Feature
+                        </div>
+                        <div class="col-xs-4" style="margin-right: -20px">
+                            <label class="switch">
+                                <input id="Experimental_Switch" type="checkbox">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                </li>
+                    <button id="apply_settings" class="btn btn-block btn-primary" style="margin-top: 20px">Apply Settings</button>
+            </ul>
+
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+<!-- Page Content -->
+
+    <!-- sidebar toggle button -->
+    <button id="sidebar_button"  style="margin: 10px 0px 0px 10px; border: none; outline: none; background: none; color:white">
+        <i id="button_icon" class="fa fa-caret-right fa-2x"> OPTIONS</i>
+    </button>
+
+    <!-- content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid" style="margin-top: 50px">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div id="jumbotron" class="jumbotron" style="background-color: rgba(0,0,0,0.2)">
+                        <div id="loading_div" class="text-center" style="align-content: center; justify-content: center"></div>
+                        <div id="conditions_row" class="row text-center" style="color:white;">
+                            <div id="location"></div>
+                            <div>
+                                <img id="condition_icon" src="" style="">
+                            </div>
+                            <div id="condition_text"></div>
+                            <div id="temperature"></div>
+                            <div id="feels_like_temperature"></div>
+                            <div id="humidity"></div>
+                            <div id="cloud_coverage"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-    <div class="wrapper" style="display: flex;justify-content: center">
-        <button id="Get">Click for location</button>
-        <button id="Experimental">Click for experimental feature</button>
-        <button id="F_or_C">Click for F or C</button>
-    </div>
-
-
-
-
-</div> <!-- // end main container -->
+        </div> <!-- // end main container -->
+    </div> <!-- // end page content -->
+</div> <!-- // end wrapper -->
 
 
 
@@ -71,7 +173,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="Weather.js"></script>
+<script src="weather.js"></script>
 
 </body>
 </html>
