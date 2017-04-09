@@ -6,8 +6,23 @@ get_weather();
 
     // toggles sidebar
 
-        $('#page-content-wrapper').click(function(){
-            $("#wrapper").toggleClass("toggled");
+        var wrapper = $('#wrapper'),
+        open = false,
+        sidebar_button = $('#sidebar_button');
+
+        sidebar_button.click(function(){
+            if(!open){
+                open = true;
+                sidebar_button.empty().html('<i id="button_icon" class="fa fa-caret-left fa-2x"></i>');
+            }
+            else if(open){
+                open = false;
+                sidebar_button.empty().html('<i id="button_icon" class="fa fa-caret-right fa-2x"></i>');
+            }
+
+            wrapper.toggleClass("toggled");
+
+
         });
 
 
@@ -94,7 +109,7 @@ get_weather();
     // Apply Settings
 
         $('#apply_settings').click(function(){
-            $("#wrapper").toggleClass("toggled");
+            wrapper.toggleClass("toggled");
             get_weather();
         });
 
@@ -335,7 +350,7 @@ get_weather();
 
                         // night time
                         else if(is_day === 0){
-                            jumbotron.css('background-color','rgba(255,255,255,0.3)', 'color','white');
+                            jumbotron.css('background-color','rgba(255,255,255,0.25)', 'color','white');
                             temp_row.css('color','white');
                             cond_row.css('color','white');
                             switch(condition_code){
