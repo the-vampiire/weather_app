@@ -19,11 +19,12 @@ get_weather();
         function open_sidebar(){
             if(open){
                 open = false;
-                sidebar_button.empty().html('<i id="button_icon" class="fa fa-caret-right fa-2x"></i>');
+                sidebar_button.empty().html('<i id="button_icon" class="fa fa-bars fa-2x"></i>');
+
             }
             else if(!open){
                 open = true;
-                sidebar_button.empty().html('<i id="button_icon" class="fa fa-caret-left fa-2x"></i>');
+                sidebar_button.empty().html('<i id="button_icon" class="fa fa-bars fa-rotate-270 fa-2x"></i>');
             }
 
             wrapper.toggleClass('toggled');
@@ -434,8 +435,8 @@ get_weather();
                 });
 
                 // shake the options menu button on page load completion to notify user of its existence...
-                setTimeout(function(){sidebar_button.effect('shake', {distance: 10},{times: 5});}, 2000);
-                setTimeout(function(){sidebar_button.effect('shake', {distance: 10},{times: 5});}, 4000);
+                setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 5});}, 3500);
+                setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 5});}, 5500);
 
 
             }
