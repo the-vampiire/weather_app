@@ -12,7 +12,7 @@ get_weather();
         var wrapper = $('#wrapper'),
         sidebar_button = $('#sidebar_button');
 
-    // function to open sidebar and translate the menu button icon 
+    // function to open sidebar and translate the menu button icon
 
         var open = false;
 
@@ -29,7 +29,7 @@ get_weather();
 
             wrapper.toggleClass('toggled');
         }
-        
+
     // call the function on click
 
         sidebar_button.click(open_sidebar);
@@ -142,7 +142,9 @@ get_weather();
         date_div = $('#date'),
         jumbotron = $('#jumbotron'),
         temp_row = $('#temperature_row'),
-        cond_row = $('#conditions_row');
+        cond_row = $('#conditions_row'),
+        img_link = $('#image_link'),
+        img_title = $('#image_title');
 
         // clear jumbotron while loading
         temperature_div.empty();
@@ -179,7 +181,7 @@ get_weather();
         // gets flickr background image based on location
             function get_flickr(lat, lon) {
 
-                $.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=NEW_KEY_WHO_DIS&' +
+                $.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=97d8e60e16e9237ae774020d6e8713a2&' +
                     'format=json&lat=' + lat + '&lon=' + lon + '&accuracy=16&safe_search=1&content_type=1&per_page=1&' +
                     'sort=interestingness-desc&text=downtown&text=city&text=skyline&media=photos&nojsoncallback=1', function (data) {
 
@@ -195,13 +197,15 @@ get_weather();
 
                     else {
                         $('body').css("background-image", "url(" + "https://farm" + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + "_h.jpg" + ")");
+                        img_link.attr('href', "https://farm" + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + "_h.jpg");
+                        img_title.html(photo.title.slice(0,photo.title.indexOf('#')));
                     }
                 });
             }
 
         // gets and displays weather on secure connection
             function get_weather_secure(lat, lon) {
-                $.get('https://api.apixu.com/v1/current.json?key=NEW_KEY_WHO_DIS&q=' + lat + ',' + lon, function (data) {
+                $.get('https://api.apixu.com/v1/current.json?key=74ee988657bd4d13bf2230737170904&q=' + lat + ',' + lon, function (data) {
 
                 // JSON data shortcuts
                     var current = data.current,
@@ -225,11 +229,11 @@ get_weather();
                     condition_text = current.condition.text,
                     condition_code = current.condition.code,
                 // Location data
-                    name = location.name,
-                    time_raw = location.localtime,
-                    time = time_raw.slice(11),
-                    date_split = time_raw.slice(0,10).split('-'),
-                    date = date_split[1]+'-'+date_split[2]+'-'+date_split[0];
+                    name = location.name;
+                    // time_raw = location.localtime,
+                    // time = time_raw.slice(11),
+                    // date_split = time_raw.slice(0,10).split('-'),
+                    // date = date_split[1]+'-'+date_split[2]+'-'+date_split[0];
 
                 // displays weather and location data
 
@@ -238,9 +242,9 @@ get_weather();
                     condition_icon_div.show();
 
                     // display date, time, location
-                        time_div.append('<h3>'+time+'</h3>');
+                        // time_div.append('<h3>'+time+'</h3>');
                         location_div.append('<h2>'+name+'</h2>');
-                        date_div.append('<h3>'+date+'</h3>');
+                        // date_div.append('<h3>'+date+'</h3>');
 
                     // display weather
                         if(Celsius){
@@ -288,20 +292,28 @@ get_weather();
                                 // sunny
                                 case 1000:
                                     body.css('background-image', 'url("Images/SUNNY_joseph-barrientos-7032_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@jbcreate_?photo=eyJdbBIk7lA');
+                                    img_title.html('Joseph Barrientos');
                                     break;
                                 // partly cloudy
                                 case (1003):
                                 case (1006):
                                     body.css('background-image', 'url("Images/PARTLY_CLOUDY_marcelo-quinan-78447_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@marceloquinan?photo=u0ZgqJD55pE');
+                                    img_title.html('Marcelo Quinan');
                                     break;
                                 // overcast
                                 case (1009):
                                     body.css('background-image', 'url("Images/OVERCAST_antoine-barres-224061_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@antoinebarres?photo=UoAWjCPpNSs');
+                                    img_title.html('Antoine Barres');
                                     break;
                                 // fog
                                 case (1030):
                                 case (1135):
                                     body.css('background-image', 'url("Images/FOG_nicolas-cool-113893_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@shotz?photo=awftcSB__Jk');
+                                    img_title.html('Nicolas Cool');
                                     break;
                                 // rainy
                                 case (1063):
@@ -324,6 +336,8 @@ get_weather();
                                 case (1273):
                                 case (1276):
                                     body.css('background-image', 'url("Images/RAINY_gabriele-diwald-201135_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@gabrielediwald?photo=Kwi60PbAM9I');
+                                    img_title.html('Gabriele DiWald');
                                     break;
                                 // snowy
                                 case (1066):
@@ -350,9 +364,13 @@ get_weather();
                                 case (1279):
                                 case (1282):
                                     body.css('background-image', 'url("Images/SNOW_tim-trad-228282_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@timtrad?photo=K_RRD1twRFg');
+                                    img_title.html('Tim Trad');
                                     break;
                                 default:
                                     body.css('background-image', 'url("Images/SUNNY_joseph-barrientos-7032_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@jbcreate_?photo=eyJdbBIk7lA');
+                                    img_title.html('Joseph Barrientos');
                             }
                         }
 
@@ -362,17 +380,23 @@ get_weather();
                                 // night sky
                                 case 1000:
                                     body.css('background-image', 'url("Images/NIGHT_hoang-duy-le-149870_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@tytoalbatraoz?photo=lYwwPmsWdOg');
+                                    img_title.html('Hoàng Duy Lê');
                                     break;
                                 // cloudy
                                 case (1003):
                                 case (1006):
                                 case (1009):
                                     body.css('background-image', 'url("Images/NIGHT_CLOUDY_matthew-kane-162961_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@matthewkane?photo=g3QBQto9Jt0');
+                                    img_title.html('Matthew Kane');
                                     break;
                                 // fog
                                 case (1030):
                                 case (1135):
                                     body.css('background-image', 'url("Images/NIGHT_FOG_aaron-lee-140096_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@aaronhjlee?photo=1CsReRMMviw');
+                                    img_title.html('Aaron Lee');
                                     break;
                                 // rainy
                                 case (1063):
@@ -395,6 +419,8 @@ get_weather();
                                 case (1273):
                                 case (1276):
                                     body.css('background-image', 'url("Images/NIGHT_RAIN_dominik-schroder-14532_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@wirhabenzeit?photo=6vdtubiccaA');
+                                    img_title.html('Dominik Schröder');
                                     break;
                                 // snowy
                                 case (1066):
@@ -421,9 +447,13 @@ get_weather();
                                 case (1279):
                                 case (1282):
                                     body.css('background-image', 'url("Images/NIGHT_SNOW_jason-strull-216097_mini.jpg")');
+                                    img_link.attr('href', '');
+                                    img_title.html('Jason Strull');
                                     break;
                                 default:
                                     body.css('background-image', 'url("Images/NIGHT_hoang-duy-le-149870_mini.jpg")');
+                                    img_link.attr('href', 'https://unsplash.com/@tytoalbatraoz?photo=lYwwPmsWdOg');
+                                    img_title.html('Hoàng Duy Lê');
 
                             }
                         }
