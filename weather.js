@@ -12,7 +12,7 @@ get_weather();
         var wrapper = $('#wrapper'),
         sidebar_button = $('#sidebar_button');
 
-    // checks arrow direction for menu button, swaps as expected and opens sidebar
+    // function to open sidebar and translate the menu button icon 
 
         var open = false;
 
@@ -29,6 +29,8 @@ get_weather();
 
             wrapper.toggleClass('toggled');
         }
+        
+    // call the function on click
 
         sidebar_button.click(open_sidebar);
 
@@ -177,7 +179,7 @@ get_weather();
         // gets flickr background image based on location
             function get_flickr(lat, lon) {
 
-                $.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=bc63861a86c28aee09bb476d83cfe159&' +
+                $.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=NEW_KEY_WHO_DIS&' +
                     'format=json&lat=' + lat + '&lon=' + lon + '&accuracy=16&safe_search=1&content_type=1&per_page=1&' +
                     'sort=interestingness-desc&text=downtown&text=city&text=skyline&media=photos&nojsoncallback=1', function (data) {
 
@@ -199,7 +201,7 @@ get_weather();
 
         // gets and displays weather on secure connection
             function get_weather_secure(lat, lon) {
-                $.get('https://api.apixu.com/v1/current.json?key=70d0f73f8eb048b8964185106170604&q=' + lat + ',' + lon, function (data) {
+                $.get('https://api.apixu.com/v1/current.json?key=NEW_KEY_WHO_DIS&q=' + lat + ',' + lon, function (data) {
 
                 // JSON data shortcuts
                     var current = data.current,
@@ -222,7 +224,6 @@ get_weather();
                     condition_icon = current.condition.icon, /*add 'https:' prefix to load icon securely*/
                     condition_text = current.condition.text,
                     condition_code = current.condition.code,
-
                 // Location data
                     name = location.name,
                     time_raw = location.localtime,
@@ -348,7 +349,7 @@ get_weather();
                                 case (1264):
                                 case (1279):
                                 case (1282):
-                                    body.css('background-image', 'url("Images/RAINY_gabriele-diwald-201135_mini.jpg")');
+                                    body.css('background-image', 'url("Images/SNOW_tim-trad-228282_mini.jpg")');
                                     break;
                                 default:
                                     body.css('background-image', 'url("Images/SUNNY_joseph-barrientos-7032_mini.jpg")');
@@ -357,9 +358,6 @@ get_weather();
 
                         // night time
                         else if(is_day === 0){
-                            jumbotron.css('background-color','rgba(255,255,255,0.25)', 'color','white');
-                            temp_row.css('color','white');
-                            cond_row.css('color','white');
                             switch(condition_code){
                                 // night sky
                                 case 1000:
@@ -441,8 +439,7 @@ get_weather();
     }
 
     // shake the options menu button on page load completion to notify user of its existence...
-    setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 5});}, 5000);
-    setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 5});}, 7500);
+    setTimeout(function(){$('#button_icon').effect('shake', {distance: 10},{times: 8});}, 5000);
 
 });
 
